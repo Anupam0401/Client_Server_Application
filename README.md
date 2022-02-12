@@ -1,6 +1,11 @@
 # Client_Server_Application
 Implementation of Client Sever Application in Python including echo client server
 
+## Problem Statement:
+Please refer [this link](https://github.com/Anupam0401/Client_Server_Application/blob/main/Assignment_3%20Socket_Programming.pdf) to view the questions of the problem.
+
+***A detailed explanation of the code and implementations can be [found here](https://github.com/Anupam0401/Client_Server_Application/blob/main/11940160_Anupam_Assignment%203.pdf)***
+
 ## Goal of the Assignment: 
 **Create your own client server application 
 using socket programming.**
