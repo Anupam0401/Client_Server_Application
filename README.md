@@ -5,7 +5,7 @@ Implementation of Client Sever Application in Python including echo client serve
 **Create your own client server application 
 using socket programming.**
 
-- **Part1:** ***Extending Echo Client/Server for network analysis:***
+- **Part1-** ***Extending Echo Client/Server for network analysis***:
   -  Creation of **UDP echo client and server** application to measure *round trip time* between client and server (similar to “ping” command)
   - The client creates a UDP socket and send echo packets to server at a given interval, number of echo messages, and given packet size which is the input to the application. On reception of the packet, server sends the packet back to the client. 
 
@@ -14,10 +14,10 @@ using socket programming.**
   - Also, we calculate the the throughput and average delay observed every one second and plot the observed throughput and average delay.
 
 
-- **Part2:** ***Extend Echo Client/Server and create your own client server application:***
+- **Part2-** ***Extend Echo Client/Server and create your own client server application***:
   -  Added two features to the echo client server. The features added are:
     * Interactive Messaging
     * File Viewer
 
-- **Part3:** ***Making Echo Client/Server “protocol Independent”:***
-  - Making the echo client server created in Part protocol independent i.e., works for both IPv4 and IPv6
+- **Part3-** ***Making Echo Client/Server “protocol Independent”***:
+  - Making the echo client server created in Part protocol independent i.e., works for both IPv4 and IPv6.
