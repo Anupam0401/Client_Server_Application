@@ -1,0 +1,269 @@
+/*
+ author : Anubhav Dinesh Patel
+ date : 07.08.2021 16:39:40 IST 
+*/
+
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#define ll long long int
+#define fast_io ios_base::sync_with_stdio(false); cin.tie(NULL)
+#define endl '\n'
+#define pb push_back
+#define mp make_pair
+#define all(a) a.begin(),a.end() 
+#define max_pqueue priority_queue< long long >
+#define min_pqueue priority_queue< long long , vector<long long> , greater< long long >>
+#define vi vector<int>
+#define vii vector<array<int, 2>>
+#define vl vector<long long>
+#define vll vector<array<long long, 2>>
+#define pii array<int, 2>
+#define pll array<ll, 2>
+#define FF first
+#define SS second
+#define sz(x) (int)x.size()
+#define gcase "Case #"<<tcase<<": "
+using namespace std;
+// using namespace __gnu_pbds;
+// typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_multiset;
+// typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
+// typedef tree<int, int, less<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_map;
+
+//~ setbase - cout << setbase (16); cout << 100 << endl; Prints 64
+//~ setfill -   cout << setfill ('x') << setw (5); cout << 77 << endl; prints xxx77
+//~ setprecision - cout << setprecision (14) << f << endl; Prints x.xxxx
+//~ cout.precision(x)  cout<<fixed<<val;  // prints x digits after decimal in val
+// count number of set bits:
+// __builtin_popcount = int, __builtin_popcountl = long int, __builtin_popcountll = long long
+
+#ifndef LOCAL_MACHINE
+#define cerr if (false) cerr
+#endif
+
+void __print(int x) {cerr << x;}
+void __print(long x) {cerr << x;}
+void __print(long long x) {cerr << x;}
+void __print(unsigned x) {cerr << x;}
+void __print(unsigned long x) {cerr << x;}
+void __print(unsigned long long x) {cerr << x;}
+void __print(float x) {cerr << x;}
+void __print(double x) {cerr << x;}
+void __print(long double x) {cerr << x;}
+void __print(char x) {cerr << '\'' << x << '\'';}
+void __print(const char *x) {cerr << '\"' << x << '\"';}
+void __print(const string &x) {cerr << '\"' << x << '\"';}
+void __print(bool x) {cerr << (x ? "true" : "false");}
+
+template<typename T, typename V>
+void __print(const pair<T, V> &x) {cerr << '{'; __print(x.first); cerr << ','; __print(x.second); cerr << '}';}
+template<typename T>
+void __print(const T &x) {int f = 0; cerr << '{'; for (auto i: x) cerr << (f++ ? "," : ""), __print(i); cerr << "}";}
+void _print() {cerr << "]\n";}
+template <typename T, typename... V>
+void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v...);}
+template<typename T>
+void _printA(T *t, long long sz) { cout<<" { "; for (long long i=0; i<sz; i++) cout<<"["<<i<<"] = "<< t[i]<<endl; cout<<" } \n";}
+#ifdef LOCAL_MACHINE
+#define debug(x...) cerr << "[" << #x << "] = ["; _print(x)
+#define debugA(x, y) cerr << "[" << #x << "] = "; _printA(x, y)
+#else
+#define debug(x...)
+#define debugA(x, y)
+#endif
+
+// const ll _MOD = 1e9 + 7LL;
+ll _MOD = 998244353LL;
+
+inline ll mod(ll a, ll m=_MOD) {
+	return ((a % m) + m) % m;
+}
+
+inline ll gcd(ll a, ll b) { return __gcd(a, b); }
+
+inline ll gcd(ll a, ll b, ll & x, ll & y) {
+	if (a == 0) {
+		x = 0;
+		y = 1;
+		return b;
+	}
+	ll x1, y1;
+	ll d = gcd(b % a, a, x1, y1);
+	x = y1 - (b / a) * x1;
+	y = x1;
+	return d;
+}
+
+inline ll modinv(ll a, ll m=_MOD) {
+	ll x, y;
+	gcd(a, m, x, y);
+	x = (x % m + m) % m;
+	return x;
+}
+
+inline ll powm(ll a, ll b, ll m=_MOD) {
+	if (b == 0) return 1;
+	ll ans = powm(a, b/2, m);
+	ans = (ans * ans) % m;
+	return (b & 1) ? (ans * (a%m)) % m : ans;
+}
+
+inline ll madd(ll a, ll b, ll m=_MOD) {
+	return mod(mod(a, m) + mod(b, m), m);
+}
+
+inline ll mmult(ll a, ll b, ll m=_MOD) {
+	return mod(mod(a, m) * mod(b, m), m);
+}
+
+inline ll mdiv(ll a, ll b, ll m=_MOD) {
+	return mod(mod(a, m) * modinv(b, m), m);	
+} 
+/* 1. If you can't keep solution in mind, then visualize it on a paper.
+ * 2. Try to identify the type of problem - DP, Greedy, Graph, Constructive, 
+ * 	  Prefix/Suffix, Difference Array, BIT/Segment Tree, etc.
+ * 3. Look at the problems from different perspectives - reverse the problem, 
+ * 	  add instead of delete (maybe?)
+ * 4. Divide difficult solutions into cases and/or sequences.
+ * 5. Use math rules to solve Nested Summation.
+ * 6. Optimisation problems are generally solved with DP, greedy, binary search or brute-force.
+ * 7. Try fixing a solution then proving we can't do better or worse than that.
+ * 8. string::push_back() is faster than +/+=, swap() is faster than =
+ * 
+ * Debugging Tricks
+ * ----------------
+ * 1. Clear arrays/stacks/queues.  
+ * 2. Check all conditions - <, >, = and != (implicit and explicit).
+ * 3. Whats the time complexity? Will it pass?
+ * ------------------------------------------------------------------ 
+ */
+
+const ll MAXN = 3e5+5;
+ll d, n, k;
+// void build(vector<ll> t, long long a[], long long v, long long tl, long long tr) {
+    // if (tl == tr) {
+        // t[v] = a[tl];
+    // } else {
+        // long long tm = (tl + tr) / 2;
+        // build(a, v*2, tl, tm);
+        // build(a, v*2+1, tm+1, tr);
+        // t[v] = t[v*2] + t[v*2+1];
+    // }
+// }
+
+long long sum(vector<ll> &t, long long v, long long tl, long long tr, long long l, long long r) {
+    if (l > r) 
+        return 0;
+    if (l == tl && r == tr) {
+        return t[v];
+    }
+    long long tm = (tl + tr) / 2;
+    return sum(t, v*2, tl, tm, l, min(r, tm))
+           + sum(t, v*2+1, tm+1, tr, max(l, tm+1), r);
+}
+
+void update(vector<ll> &t, long long v, long long tl, long long tr, long long pos, long long new_val) {
+	// debug(v, tl, tr);
+    if (tl == tr) {
+        t[v] = new_val;
+    } else {
+        long long tm = (tl + tr) / 2;
+        if (pos <= tm)
+            update(t, v*2, tl, tm, pos, new_val);
+        else
+            update(t, v*2+1, tm+1, tr, pos, new_val);
+        t[v] = t[v*2] + t[v*2+1];
+    }
+}
+
+int bs(vector<ll> &st1, int l, int r, long long val) {
+	r++;
+	while (l < r) {
+		int mid = (l + r) / 2;
+		long long v = sum(st1, 1, 0, n - 1, 0, mid);
+		debug(v, l, r);
+		if (v < val) {
+			l = mid + 1;
+		}
+		else {
+			r = mid;
+		}
+	}
+	return l;
+}
+
+void solve(int tcase) {
+	cin>>d>>n>>k;
+	map<ll, vector<int>> st, ed;
+	vector<ll> h(n), s(n), e(n);
+	set<ll> points;
+	vector<ll> st1(4*n), st2(4*n);
+
+	for (int i = 0; i < n; i++) {
+		cin>>h[i]>>s[i]>>e[i];
+		st[s[i]].push_back(i);
+		ed[e[i]].push_back(i);
+		points.insert(s[i]);
+		points.insert(e[i]);
+	}
+	
+	// debug(h, s, e);
+	vector<int> sa(n);
+	iota(all(sa), 0);
+	sort(all(sa), [&](int x, int y) {
+		return h[x] > h[y];
+	});
+	
+	map<int , int> to_ii;
+	for (int i = 0; i < n; i++)
+		to_ii[sa[i]] = i;
+	
+	// debug(to_ii);
+	ll ans = 0;
+	         
+	for (auto p : points) {
+		// debug(p, st[p]);
+		for (auto idx : st[p]) {
+			update(st1, 1, 0, n - 1, to_ii[idx], 1);
+			update(st2, 1, 0, n - 1, to_ii[idx], h[idx]); 
+		}
+		
+		// debug(st1);
+		// debug(sum(st1, 1, 0, n - 1, 0, n - 1));
+		int idx = bs(st1, 0, n - 1, k);
+		idx = min(n - 1, (ll)idx);
+		debug(idx);
+		// debug(sum(st1, 1, 0, n - 1, 0, idx));
+		
+		
+		ans = max(ans, sum(st2, 1, 0, n - 1, 0, idx));
+		for (auto idx : ed[p]) {
+			update(st1, 1, 0, n - 1, to_ii[idx], 0);
+			update(st2, 1, 0, n - 1, to_ii[idx], 0); 
+		}
+	}
+	
+	cout<<gcase<<ans<<endl;
+}
+	
+void preprocess() {
+}
+
+int main() {
+#ifdef LOCAL_MACHINE
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
+freopen("in", "r", stdin);
+#pragma GCC diagnostic pop
+cout << "\033[2J\033[1;1H";
+#endif
+
+	fast_io;
+	preprocess();
+	ll T;
+	T = 1;
+	cin>>T;
+	for (ll t=1; t<=T; t++) {
+		solve(t);
+	}
+}	

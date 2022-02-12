@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+
+#define fi first
+#define se second
+
+const int N = 300300;
+
+using namespace std;
+
+int n;
+int m;
+int k;
+vector<int> A[N], B[N];
+
+void solve()
+{
+        cin >> n >> m >> k;
+        for(int i = 1; i <= n; i++){
+                A[i].clear();
+                B[i].clear();
+        }
+
+        for(int i = 1; i <= m; i++){
+                int x, l, r;
+                cin >> x >> l >> r;
+                A[l].push_back(x);
+                B[r].push_back(x);
+        }
+
+        long long res = 0, cur = 0;
+        multiset<int> S, T;
+
+        for(int i = 1; i <= n; i++){
+                for(int x: A[i]){
+                        S.insert(x);
+                        cur += x;
+                }
+
+                while(S.size() < k && !T.empty()){
+                        cur += *(--T.end());
+                        S.insert(*(--T.end()));
+                        T.erase(--T.end());
+                }
+                while(S.size() > k){
+                        cur -= *S.begin();
+                        T.insert(*S.begin());
+                        S.erase(S.begin());
+                }
+                while(!S.empty() && !T.empty() && *S.begin() < *(--T.end())){
+                        int x = *S.begin();
+                        int y = *(--T.end());
+                        S.erase(S.begin());
+                        T.erase(--T.end());
+
+                        cur += y - x;
+
+                        S.insert(y);
+                        T.insert(x);
+                }
+                res = max(res, cur);
+
+                for(int x: B[i]){
+                        if(S.find(x) == S.end()){
+                                T.erase(T.find(x));
+                        } else{
+                                S.erase(S.find(x));
+                                cur -= x;
+                        }
+                }
+        }
+        cout << res << "\n";
+}
+
+int main()
+{
+        #ifdef zxc
+                freopen("input.txt", "r", stdin);
+                freopen("output.txt", "w", stdout);
+        #endif
+        ios_base::sync_with_stdio(0);
+
+        int t;
+        cin >> t;
+        for(int i = 1; i <= t; i++){
+                cout << "Case #" << i << ": ";
+                solve();
+        }
+}
