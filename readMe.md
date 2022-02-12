@@ -10,6 +10,6 @@
 * For Part2, I have also provided test files inside the Part2 folder for testing File Viewer.
 
 **Folder Content (11940160_Anupam_Assignment3):**
-	- Report(11940160_Anupam_Assignment3.pdf)
-	- Files: Part1, Part2, Part3 (contains source codes)
+- Report(11940160_Anupam_Assignment3.pdf)
+- Files: Part1, Part2, Part3 (contains source codes)
 		
